@@ -1,7 +1,8 @@
 package com.github.ygimenez.model;
 
-import com.github.ygimenez.handler.CommandManager;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.Objects;
 import java.util.Set;

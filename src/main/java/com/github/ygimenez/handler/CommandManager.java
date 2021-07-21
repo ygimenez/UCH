@@ -7,9 +7,7 @@ import com.github.ygimenez.model.Category;
 import com.github.ygimenez.model.PreparedCommand;
 import com.github.ygimenez.model.UCH;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.internal.utils.JDALogger;
 import org.reflections8.Reflections;
-import org.slf4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -130,10 +128,12 @@ public class CommandManager {
 				params.name(),
 				params.aliases(),
 				params.usage(),
-				"cmd_" + cmd.getSimpleName()
-						.replaceAll("Command|Reaction", "")
-						.replaceAll("[a-z](?=[A-Z])", "$0-")
-						.toLowerCase(),
+				UCH.isLocalized() ?
+						"cmd_" + cmd.getSimpleName()
+								.replaceAll("Command|Reaction", "")
+								.replaceAll("[a-z](?=[A-Z])", "$0-")
+								.toLowerCase()
+						: params.description(),
 				params.category(),
 				req == null ? new Permission[0] : req.value(),
 				buildCommand(cmd),
@@ -145,8 +145,7 @@ public class CommandManager {
 		try {
 			return (Executable) klass.getConstructor().newInstance();
 		} catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-			Logger logger = JDALogger.getLog(this.getClass());
-			logger.error(e.getMessage(), e);
+			UCH.logger.error(e.getMessage(), e);
 
 			return null;
 		}

@@ -1,6 +1,8 @@
 package com.github.ygimenez.model;
 
 import com.github.ygimenez.handler.CommandManager;
+import net.dv8tion.jda.internal.utils.JDALogger;
+import org.slf4j.Logger;
 
 import java.util.Locale;
 import java.util.Map;
@@ -12,6 +14,7 @@ public class UCH {
 	private static Map<String, Category> categories;
 	private static boolean localized;
 	private static boolean finished;
+	public static final Logger logger = JDALogger.getLog("UCH");
 
 	public static CommandManager getManager() {
 		if (!finished) throw new IllegalStateException("You cannot retrieve UCH values before finishing setup.");
